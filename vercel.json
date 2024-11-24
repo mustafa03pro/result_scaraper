@@ -1,0 +1,25 @@
+{
+    "builds": [{
+        "src": "UniversityResults/wsgi.py",
+        "use": "@vercel/python",
+        "config": { "maxLambdaSize": "15mb", "runtime": "python3.11" }
+    },{
+        "src":"build_files.sh",
+        "use":"@vercel/static-build",
+        "config":{
+            "disDir":"stticfiles_build"
+        }
+
+    }
+],
+    "routes": [
+        {
+            "src":"/static/(.*)",
+            "dest":"/static/$1"
+        },
+        {
+            "src": "/(.*)",
+            "dest": "UniversityResults/wsgi.py"
+        }
+    ]
+}
